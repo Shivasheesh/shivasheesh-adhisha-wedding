@@ -181,7 +181,7 @@ h2 {
 .venue-date,
 .eyebrow {
   font-family: "Open Sans", Arial, sans-serif;
-  font-size: clamp(0.78rem, 2.9vw, 1rem);
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   line-height: 1.5;
@@ -265,6 +265,7 @@ h2 {
 
 .gold-text {
   color: var(--gold);
+    font-size: 1rem;
 }
 
 .section-intro {
@@ -596,7 +597,8 @@ h2 {
 .children-names {
   margin: 0 auto 10px;
   color: var(--gold);
-  font-size: clamp(1rem, 3.5vw, 1.18rem);
+font-size: 0.88rem;
+   font-family: "Open Sans", Arial, sans-serif;
   line-height: 1.55;
 }
 
@@ -632,7 +634,8 @@ h2 {
 .rsvp-block p {
   margin-bottom: 0;
   color: #fff6e8;
-  font-size: clamp(1rem, 3.2vw, 1.14rem);
+  font-size: 0.88rem;
+   font-family: "Open Sans", Arial, sans-serif;
   line-height: 1.55;
 }
 
