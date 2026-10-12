@@ -46,6 +46,8 @@ h2 {
   line-height: 1;
 }
 
+/* Intro screen */
+
 #intro {
   position: fixed;
   inset: 0;
@@ -72,13 +74,6 @@ h2 {
   border: 1px solid rgba(211, 175, 98, 0.35);
   border-radius: 50%;
   content: "";
-}
-
-.hero-ganesh {
-  display: block;
-  width: min(85px, 22vw);
-  height: auto;
-  margin: 0 auto 12px;
 }
 
 #intro::after {
@@ -127,6 +122,8 @@ h2 {
   display: none;
 }
 
+/* Hero */
+
 .hero {
   position: relative;
   display: grid;
@@ -154,6 +151,13 @@ h2 {
   max-width: 850px;
 }
 
+.hero-ganesh {
+  display: block;
+  width: min(85px, 22vw);
+  height: auto;
+  margin: 0 auto 12px;
+}
+
 .hero-prayer {
   margin-bottom: 28px;
 }
@@ -161,11 +165,13 @@ h2 {
 .invitation-line,
 .hero-date,
 .eyebrow {
-
-  margin-bottom: 35px;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+.invitation-line {
+  margin-bottom: 35px;
 }
 
 .hero h1 {
@@ -222,6 +228,8 @@ h2 {
   animation: bounce 1.8s infinite;
 }
 
+/* General cream sections */
+
 .couple-section,
 .gallery-section,
 .ceremony-section {
@@ -241,6 +249,8 @@ h2 {
   font-size: 1.2rem;
   line-height: 1.6;
 }
+
+/* Couple details */
 
 .couple-grid {
   display: grid;
@@ -294,6 +304,8 @@ h2 {
   font-size: 4.5rem;
 }
 
+/* Countdown */
+
 .countdown-section {
   padding: 100px 24px;
   color: white;
@@ -344,6 +356,8 @@ h2 {
   letter-spacing: 0.08em;
 }
 
+/* Gallery */
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -369,6 +383,8 @@ h2 {
   grid-column: span 2;
   grid-row: span 2;
 }
+
+/* Venue */
 
 .venue-section {
   position: relative;
@@ -423,6 +439,8 @@ h2 {
   color: var(--maroon);
 }
 
+/* Events */
+
 .events {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -454,46 +472,21 @@ h2 {
   margin-bottom: 8px;
 }
 
-footer {
-  padding: 75px 24px;
-  color: #f8ebd5;
-  background: var(--deep-maroon);
-}
+/* Family request / child invitation */
 
-footer h2 {
-  color: var(--gold);
-  font-size: clamp(3rem, 8vw, 5rem);
-}
-
-footer p:last-child {
-  margin-bottom: 0;
-}
-
-#musicBtn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 50;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  background: var(--maroon);
-  color: var(--gold);
-  cursor: pointer;
-  font-size: 1.35rem;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
 .family-request-section {
+  width: 100%;
   padding: 95px 24px;
   color: #f8ebd5;
-  background:
-    radial-gradient(circle at top, rgba(139, 37, 59, 0.55), transparent 48%),
-    var(--deep-maroon);
+  background-color: var(--deep-maroon);
+  background-image:
+    radial-gradient(
+      circle at top,
+      rgba(139, 37, 59, 0.55),
+      transparent 48%
+    );
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .family-request-section h2 {
@@ -501,10 +494,20 @@ footer p:last-child {
   font-size: clamp(3.2rem, 9vw, 5.7rem);
 }
 
+.family-request-section .eyebrow.gold-text {
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-family: "Noto Serif Devanagari", serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+}
+
 .heart-divider {
   margin: 28px 0 42px;
-  color: #e5a2a9;
-  font-size: 1.8rem;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .request-block,
@@ -519,12 +522,14 @@ footer p:last-child {
   max-width: 650px;
   margin: 0 auto 22px;
   color: #fff6e8;
+  font-family: "Noto Serif Devanagari", serif;
   font-size: clamp(1.2rem, 3.8vw, 1.55rem);
-  font-style: italic;
-  line-height: 1.65;
+  font-style: normal;
+  line-height: 1.8;
 }
 
 .children-names {
+  margin-bottom: 0;
   color: var(--gold);
   font-size: 1.2rem;
   line-height: 1.6;
@@ -582,25 +587,83 @@ footer p:last-child {
   color: var(--deep-maroon);
 }
 
-.family-request-section .eyebrow.gold-text {
-  font-size: 1.15rem;
-  letter-spacing: 0.1em;
+/* Footer */
+
+footer {
+  padding: 75px 24px;
+  color: #f8ebd5;
+  background: var(--deep-maroon);
 }
 
+footer h2 {
+  color: var(--gold);
+  font-size: clamp(3rem, 8vw, 5rem);
+}
+
+footer > p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Music button */
+
+#musicBtn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--maroon);
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 1.35rem;
+}
+
+/* Animation */
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Mobile */
+
 @media (max-width: 700px) {
-    .person-card h3 {
+  .person-card h3 {
     font-size: 2rem;
   }
 
-  .family-list {
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
+  .family-request-section {
+    width: 100%;
+    padding: 75px 20px;
+    background-color: var(--deep-maroon);
+    background-image:
+      radial-gradient(
+        circle at top,
+        rgba(139, 37, 59, 0.55),
+        transparent 58%
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-.child-poem br,
-.children-names br {
-  display: none;
-}
+  .family-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .child-poem br,
+  .children-names br {
+    display: none;
+  }
 
   .couple-grid {
     grid-template-columns: 1fr;
