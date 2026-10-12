@@ -94,7 +94,7 @@ h2 {
   margin-bottom: 14px;
   color: var(--gold);
   font-family: "Noto Serif Devanagari", serif;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
 }
 
 .intro-message {
@@ -102,6 +102,7 @@ h2 {
   z-index: 1;
   margin-bottom: 8px;
   letter-spacing: 0.18em;
+font-size: 1.3rem;
   text-transform: uppercase;
 }
 
@@ -217,7 +218,7 @@ h2 {
   gap: 8px;
   margin-top: 45px;
   color: white;
-  font-size: 0.68rem;
+  font-size: 1rem;
   letter-spacing: 0.15em;
   text-decoration: none;
 }
@@ -241,6 +242,7 @@ h2 {
 .eyebrow {
   margin-bottom: 16px;
   color: var(--wine);
+  font-size: 1.0rem;
 }
 
 .section-intro {
@@ -268,8 +270,7 @@ h2 {
   box-shadow: 0 8px 25px rgba(66, 36, 42, 0.08);
 }
 
-.person-card h3,
-.event h3 {
+.person-card h3 {
   margin-bottom: 0;
   color: var(--maroon);
   font-family: "Great Vibes", cursive;
@@ -277,23 +278,32 @@ h2 {
   font-weight: 400;
 }
 
+.event h3 {
+  margin-bottom: 12px;
+  color: var(--maroon);
+ font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
 .role {
   margin-bottom: 15px;
   color: var(--gold);
-  font-size: 0.72rem;
+  font-size: 1.1rem;
   letter-spacing: 0.18em;
 }
 
 .parents {
   color: var(--maroon);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .grandparents {
   color: #76545a;
-  font-size: 0.96rem;
+  font-size: 1.2rem;
   font-style: italic;
   line-height: 1.45;
 }
@@ -421,6 +431,14 @@ h2 {
   line-height: 1.55;
 }
 
+.venue-date {
+  font-size: 1.2rem;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+
 .outline-btn {
   display: inline-block;
   margin-top: 15px;
@@ -470,6 +488,23 @@ h2 {
 
 .event p {
   margin-bottom: 8px;
+}
+
+.event-date {
+  margin-bottom: 10px;
+  color: var(--maroon);
+  font-family: "Merriweather Sans", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.event-venue {
+  margin-bottom: 10px;
+  color: #76545a;
+   font-family: "Merriweather Sans", Arial, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.45;
 }
 
 /* Family request / child invitation */
@@ -531,7 +566,7 @@ h2 {
 .children-names {
   margin-bottom: 0;
   color: var(--gold);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   line-height: 1.6;
 }
 
@@ -556,17 +591,19 @@ h2 {
 .family-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 30px;
+  justify-items: center;
+  gap: 14px 30px;
   max-width: 850px;
   margin: 26px auto 0;
 }
+
 
 .family-list p,
 .compliments-block p,
 .rsvp-block p {
   margin-bottom: 0;
   color: #fff6e8;
-  font-size: 1.16rem;
+  font-size: 1.3rem;
   line-height: 1.6;
 }
 
@@ -585,6 +622,14 @@ h2 {
 .phone-link:hover {
   background: var(--gold);
   color: var(--deep-maroon);
+}
+
+
+.family-list .family-divider {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 420px;
+  margin: 8px auto;
 }
 
 /* Footer */
@@ -703,4 +748,19 @@ footer > p:last-of-type {
   .event:first-child {
     border-left: 1px solid rgba(122, 31, 43, 0.25);
   }
+}
+
+@font-face {
+  font-family: "Gigi Custom";
+  src: url("assets/fonts/GIGI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.venue-name-gigi {
+  font-family: "Gigi Custom", "Great Vibes", cursive;
+  font-size: 2.8rem;
+  font-weight: normal;
+  line-height: 1.2;
 }
