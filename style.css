@@ -11,6 +11,7 @@
   --deep-maroon: #300812;
   --wine: #73172a;
   --gold: #d3af62;
+  --gold-soft: rgba(211, 175, 98, 0.22);
   --cream: #f7f0e4;
   --light-cream: #fffaf2;
   --ink: #42242a;
@@ -56,6 +57,26 @@ h2 {
   font-size: clamp(2.8rem, 8vw, 5.2rem);
   font-weight: 400;
   line-height: 1.05;
+}
+
+/* Date highlighting */
+
+.date-highlight {
+  display: inline-block;
+  padding: 0.18em 0.55em;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: inherit;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.countdown-section .date-highlight,
+.hero .date-highlight {
+  color: var(--gold);
+  background: rgba(211, 175, 98, 0.14);
 }
 
 /* Intro */
@@ -163,8 +184,14 @@ h2 {
 .hero-content {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .hero-ganesh {
@@ -192,23 +219,40 @@ h2 {
   margin-bottom: 22px;
 }
 
-.hero h1 {
+.couple-names {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  width: 100%;
+  max-width: 900px;
   margin: 8px 0 20px;
   color: #fff8ed;
   font-family: "Great Vibes", cursive;
   font-size: clamp(3.8rem, 12vw, 8rem);
   font-weight: 400;
-  line-height: 0.78;
+  line-height: 0.85;
+  text-align: center;
 }
 
-.hero h1 em {
-  margin: 8px 0;
+.couple-names .name {
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.couple-names .ampersand {
+  margin: 0.1em 0;
   color: var(--gold);
   font-family: "Cormorant Garamond", serif;
   font-size: 0.48em;
   font-style: normal;
+  line-height: 1;
 }
 
 .divider,
@@ -265,7 +309,7 @@ h2 {
 
 .gold-text {
   color: var(--gold);
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .section-intro {
@@ -296,9 +340,12 @@ h2 {
 .person-card h3 {
   margin-bottom: 0;
   color: var(--maroon);
-  font-family: "Great Vibes", cursive;
-  font-size: clamp(2rem, 4vw, 2.65rem);
-  font-weight: 400;
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .role {
@@ -327,7 +374,8 @@ h2 {
 .and-symbol {
   color: var(--gold);
   font-family: "Great Vibes", cursive;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
 }
 
 /* Countdown */
@@ -530,6 +578,12 @@ h2 {
   line-height: 1.45;
 }
 
+.event .date-highlight {
+  border-color: rgba(115, 23, 42, 0.35);
+  background: rgba(211, 175, 98, 0.18);
+  color: var(--maroon);
+}
+
 .event-venue {
   color: #76545a;
   font-family: "Merriweather Sans", Arial, sans-serif;
@@ -597,8 +651,8 @@ h2 {
 .children-names {
   margin: 0 auto 10px;
   color: var(--gold);
-font-size: 0.88rem;
-   font-family: "Open Sans", Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 0.88rem;
   line-height: 1.55;
 }
 
@@ -634,8 +688,8 @@ font-size: 0.88rem;
 .rsvp-block p {
   margin-bottom: 0;
   color: #fff6e8;
+  font-family: "Open Sans", Arial, sans-serif;
   font-size: 0.88rem;
-   font-family: "Open Sans", Arial, sans-serif;
   line-height: 1.55;
 }
 
@@ -809,4 +863,34 @@ footer > p:last-of-type {
   .request-divider {
     margin: 32px auto;
   }
+
+  .date-highlight {
+    padding: 0.15em 0.45em;
+    letter-spacing: 0.05em;
+  }
+}
+
+.hero-content .couple-names {
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif !important;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.hero-content .couple-names .name {
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: none !important;
+}
+
+.hero-content .couple-names .ampersand {
+  font-family: "Great Vibes", cursive !important;
+  font-size: 0.8em !important;
+  font-weight: 400 !important;
+  color: var(--gold);
+  line-height: 1;
 }
