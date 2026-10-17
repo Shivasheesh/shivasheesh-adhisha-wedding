@@ -894,3 +894,602 @@ footer > p:last-of-type {
   color: var(--gold);
   line-height: 1;
 }
+
+/* Load after your existing style.css. */
+#invite[hidden] { display: none !important; }
+#intro { overflow: hidden; isolation: isolate; transition: opacity .85s ease, visibility .85s ease; }
+#intro.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+#intro > img, #intro > p, #intro > .intro-arrow { position: relative; z-index: 2; }
+.hero, footer { position: relative; isolation: isolate; }
+.hero-content { position: relative; z-index: 2; }
+.petal-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.petal { position: absolute; top: -12%; left: var(--left); width: var(--size, 15px); height: calc(var(--size, 15px) * 1.5); border-radius: 85% 12% 75% 18%; background: linear-gradient(135deg, #ffe2d5 0%, #e99b9f 48%, #b64e67 100%); box-shadow: inset 1px 1px 3px #fff5; opacity: 0; animation: wedding-petal-fall var(--duration, 14s) linear infinite; animation-delay: var(--delay, 0s); }
+.petal-1 { --left: 8%; --duration: 13s; --delay: -3s; --size: 14px; --drift: 65px; }
+.petal-2 { --left: 26%; --duration: 17s; --delay: -12s; --size: 19px; --drift: -55px; }
+.petal-3 { --left: 44%; --duration: 15s; --delay: -7s; --size: 12px; --drift: 90px; }
+.petal-4 { --left: 62%; --duration: 19s; --delay: -15s; --size: 17px; --drift: -75px; }
+.petal-5 { --left: 79%; --duration: 14s; --delay: -10s; --size: 13px; --drift: 50px; }
+.petal-6 { --left: 92%; --duration: 18s; --delay: -5s; --size: 16px; --drift: -100px; }
+@keyframes wedding-petal-fall {
+  0% { top: -12%; opacity: 0; transform: translateX(0) rotate(0deg); }
+  10% { opacity: .7; }
+  50% { transform: translateX(var(--drift)) rotate(170deg) rotateY(150deg); }
+  90% { opacity: .55; }
+  100% { top: 110%; opacity: 0; transform: translateX(0) rotate(350deg) rotateY(310deg); }
+}
+.intro-rings { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 0; }
+.intro-rings span { position: absolute; width: min(78vw, 490px); aspect-ratio: 1; border: 1px solid #d9b67966; border-radius: 50%; animation: wedding-ring 7s ease-in-out infinite; }
+.intro-rings span + span { width: min(88vw, 550px); border-style: dashed; opacity: .5; animation-delay: -3.5s; }
+@keyframes wedding-ring { 0%,100% { transform: scale(.96); opacity: .35; } 50% { transform: scale(1.04); opacity: .8; } }
+.intro-shimmer { position: absolute; inset: -50%; background: linear-gradient(115deg, transparent 40%, #ffe6b50b 48%, #ffe6b51c 50%, transparent 58%); pointer-events: none; animation: wedding-shimmer 9s ease-in-out infinite; }
+@keyframes wedding-shimmer { 0%,15% { transform: translateX(-65%); } 75%,100% { transform: translateX(65%); } }
+#intro .intro-arrow { display: inline-block; animation: wedding-arrow 2s ease-in-out infinite; }
+@keyframes wedding-arrow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
+.wedding-motion .reveal-item { opacity: 0; transform: translateY(22px); transition: opacity .85s ease, transform .85s cubic-bezier(.2,.65,.3,1); transition-delay: var(--reveal-delay, 0ms); }
+.wedding-motion .hero.is-revealed .reveal-item { opacity: 1; transform: none; }
+.wedding-motion .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.65,.3,1); }
+.wedding-motion .reveal-left { transform: translateX(-28px); }
+.wedding-motion .reveal-right { transform: translateX(28px); }
+.wedding-motion .reveal-scale { transform: scale(.96); }
+.wedding-motion .reveal.is-visible { opacity: 1; transform: none; }
+#intro:focus-visible, #musicBtn:focus-visible { outline: 2px solid #dfbd7b; outline-offset: 5px; }
+body.wedding-page-hidden .petal, body.wedding-page-hidden .intro-rings span, body.wedding-page-hidden .intro-shimmer { animation-play-state: paused; }
+@media (max-width: 600px) { .petal-4, .petal-6 { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .petal-field, .intro-shimmer { display: none; }
+  #intro, #intro .intro-arrow, .intro-rings span { animation: none !important; transition: none !important; }
+  .wedding-motion .reveal, .wedding-motion .reveal-item { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* =========================================================
+   WEDDING INVITATION — ANIMATION LAYER
+   Load after style.css.
+   ========================================================= */
+
+:root {
+  --motion-gold: #d9b66f;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 900ms;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.invite-locked {
+  overflow: hidden;
+}
+
+/* Keep decorative layers from intercepting clicks. */
+.petal-field,
+.intro-rings,
+.intro-shimmer,
+.hero-overlay {
+  pointer-events: none;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+#intro {
+  cursor: pointer;
+  isolation: isolate;
+  overflow: hidden;
+  transform-origin: center;
+  transition:
+    opacity 850ms ease,
+    transform 1100ms var(--motion-ease),
+    filter 850ms ease;
+}
+
+#intro:focus-visible {
+  outline: 3px solid var(--motion-gold);
+  outline-offset: -8px;
+}
+
+#intro.is-opening {
+  opacity: 0;
+  transform: scale(1.09);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+#intro > img {
+  animation: intro-arrive 1400ms var(--motion-ease) both;
+}
+
+#intro .sanskrit {
+  animation: intro-arrive 1400ms 180ms var(--motion-ease) both;
+}
+
+.intro-message {
+  animation:
+    intro-arrive 1200ms 350ms var(--motion-ease) both,
+    invitation-glow 3200ms 1600ms ease-in-out infinite;
+}
+
+.intro-arrow {
+  display: inline-block;
+  animation: arrow-float 1800ms ease-in-out infinite;
+}
+
+.intro-rings {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+}
+
+.intro-rings span {
+  position: absolute;
+  width: min(76vw, 440px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(217 182 111 / 24%);
+  border-radius: 50%;
+  animation: ring-expand 6s ease-out infinite;
+}
+
+.intro-rings span:nth-child(2) {
+  animation-delay: -3s;
+}
+
+.intro-shimmer {
+  position: absolute;
+  inset: -50%;
+  z-index: 2;
+  background: linear-gradient(
+    110deg,
+    transparent 40%,
+    rgb(255 235 186 / 10%) 50%,
+    transparent 60%
+  );
+  animation: intro-shimmer 7s ease-in-out infinite;
+}
+
+/* =========================================================
+   HERO AND SCROLL REVEALS
+   Elements are hidden only after JavaScript initializes.
+   ========================================================= */
+
+.motion-ready .reveal,
+.motion-ready .reveal-item {
+  --reveal-x: 0px;
+  --reveal-y: 32px;
+  --reveal-scale: 1;
+
+  opacity: 0;
+  transform:
+    translate3d(var(--reveal-x), var(--reveal-y), 0)
+    scale(var(--reveal-scale));
+
+  transition:
+    opacity var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready .reveal-left {
+  --reveal-x: -45px;
+  --reveal-y: 12px;
+}
+
+.motion-ready .reveal-right {
+  --reveal-x: 45px;
+  --reveal-y: 12px;
+}
+
+.motion-ready .reveal-scale {
+  --reveal-y: 12px;
+  --reveal-scale: 0.95;
+}
+
+.motion-ready .reveal.is-visible,
+.motion-ready .reveal-item.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.hero,
+footer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.couple-names .name,
+.couple-names .ampersand {
+  display: block;
+}
+
+.scroll-link b {
+  display: inline-block;
+  animation: arrow-float 2s ease-in-out infinite;
+}
+
+.divider span,
+.request-divider span {
+  display: inline-block;
+  animation: ornament-turn 18s linear infinite;
+}
+
+/* =========================================================
+   EVENT CARD CHOREOGRAPHY
+   ========================================================= */
+
+.event {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.motion-ready .event.reveal {
+  --reveal-y: 46px;
+  --reveal-scale: 0.975;
+
+  transition-duration: 1000ms;
+}
+
+/* A light sweep crosses each event when it appears. */
+.event::after {
+  content: "";
+  position: absolute;
+  inset: -30% -70%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-65%) rotate(-12deg);
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgb(217 182 111 / 15%) 50%,
+    transparent 62%
+  );
+}
+
+.motion-ready .event.is-visible::after {
+  animation: event-sweep 1400ms
+    calc(var(--reveal-delay, 0ms) + 180ms)
+    ease-out both;
+}
+
+/* Reveal the number, title, date, and locations in sequence. */
+.motion-ready .event > * {
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 650ms ease,
+    transform 750ms var(--motion-ease);
+
+  transition-delay:
+    calc(
+      var(--reveal-delay, 0ms) +
+      var(--detail-delay, 0ms) +
+      150ms
+    );
+}
+
+.motion-ready .event.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-ready .event > :nth-child(1) {
+  --detail-delay: 0ms;
+}
+
+.motion-ready .event > :nth-child(2) {
+  --detail-delay: 90ms;
+}
+
+.motion-ready .event > :nth-child(3) {
+  --detail-delay: 180ms;
+}
+
+.motion-ready .event > :nth-child(4) {
+  --detail-delay: 270ms;
+}
+
+.motion-ready .event > :nth-child(5) {
+  --detail-delay: 360ms;
+}
+
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+
+.time-card {
+  position: relative;
+  transition:
+    translate 350ms var(--motion-ease),
+    box-shadow 350ms ease;
+}
+
+.time-card > span {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-card > span.digit-changing {
+  animation: digit-change 400ms var(--motion-ease);
+}
+
+/* =========================================================
+   PETALS
+   ========================================================= */
+
+.petal-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -12%;
+  left: var(--petal-left, 50%);
+  width: var(--petal-size, 13px);
+  height: calc(var(--petal-size, 13px) * 1.45);
+  border-radius: 75% 0 75% 20%;
+  background: linear-gradient(
+    140deg,
+    rgb(248 204 186 / 75%),
+    rgb(212 145 135 / 30%)
+  );
+  opacity: 0;
+  animation: petal-fall var(--petal-duration, 16s) linear infinite;
+  animation-delay: var(--petal-delay, 0s);
+}
+
+.petal-1 {
+  --petal-left: 8%;
+  --petal-size: 12px;
+  --petal-duration: 17s;
+  --petal-delay: -4s;
+}
+
+.petal-2 {
+  --petal-left: 25%;
+  --petal-size: 9px;
+  --petal-duration: 21s;
+  --petal-delay: -12s;
+}
+
+.petal-3 {
+  --petal-left: 43%;
+  --petal-size: 15px;
+  --petal-duration: 19s;
+  --petal-delay: -7s;
+}
+
+.petal-4 {
+  --petal-left: 61%;
+  --petal-size: 10px;
+  --petal-duration: 23s;
+  --petal-delay: -17s;
+}
+
+.petal-5 {
+  --petal-left: 78%;
+  --petal-size: 13px;
+  --petal-duration: 18s;
+  --petal-delay: -9s;
+}
+
+.petal-6 {
+  --petal-left: 91%;
+  --petal-size: 8px;
+  --petal-duration: 25s;
+  --petal-delay: -20s;
+}
+
+/* Pause decorative animation outside the visible viewport. */
+.motion-ready .petal-field .petal {
+  animation-play-state: paused;
+}
+
+.motion-ready .petal-field.is-active .petal {
+  animation-play-state: running;
+}
+
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
+
+.outline-btn,
+#musicBtn {
+  transition:
+    translate 300ms var(--motion-ease),
+    box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+
+.outline-btn span {
+  display: inline-block;
+  transition: transform 300ms var(--motion-ease);
+}
+
+#musicBtn {
+  z-index: 1000;
+}
+
+#musicBtn.is-playing {
+  box-shadow: 0 0 0 5px rgb(217 182 111 / 16%);
+}
+
+.outline-btn:focus-visible,
+.scroll-link:focus-visible,
+#musicBtn:focus-visible {
+  outline: 2px solid var(--motion-gold);
+  outline-offset: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .event.is-visible:hover,
+  .person-card.is-visible:hover,
+  .time-card:hover {
+    translate: 0 -6px;
+  }
+
+  .event,
+  .person-card {
+    transition-property: opacity, transform, translate;
+  }
+
+  .outline-btn:hover,
+  #musicBtn:hover {
+    translate: 0 -3px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 14%);
+  }
+
+  .outline-btn:hover span {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes intro-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes invitation-glow {
+  0%, 100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes arrow-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@keyframes ring-expand {
+  0% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes intro-shimmer {
+  0%, 45% {
+    transform: translateX(-60%);
+  }
+  80%, 100% {
+    transform: translateX(60%);
+  }
+}
+
+@keyframes ornament-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes event-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-65%) rotate(-12deg);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(65%) rotate(-12deg);
+  }
+}
+
+@keyframes digit-change {
+  0% {
+    opacity: 0.35;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.65;
+  }
+  85% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(70px, 110vh, 0) rotate(420deg);
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .motion-ready .reveal,
+  .motion-ready .reveal-item,
+  .motion-ready .event > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .petal-field,
+  .intro-rings,
+  .intro-shimmer {
+    display: none;
+  }
+}
