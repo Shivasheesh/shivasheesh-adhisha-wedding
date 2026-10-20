@@ -335,6 +335,25 @@ if (prefersReducedMotion && intro) {
     music.addEventListener("ended", updateMusicButton);
     music.addEventListener("error", updateMusicButton);
   }
+/* Pause music when the page is hidden; resume on return if it was playing. */
+let resumeOnReturn = false;
+
+document.addEventListener("visibilitychange", () => {
+  if (!music) return;
+
+  if (document.hidden) {
+    resumeOnReturn = !music.paused;
+    music.pause();
+  } else if (resumeOnReturn) {
+    resumeOnReturn = false;
+    playMusic();
+  }
+});
+
+/* iOS Safari sometimes skips visibilitychange when navigating away. */
+window.addEventListener("pagehide", () => {
+  if (music) music.pause();
+});
 
   updateMusicButton();
 
